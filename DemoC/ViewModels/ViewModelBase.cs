@@ -7,6 +7,6 @@ namespace DemoC.ViewModels
     {
         protected readonly PostgresContext _context = new PostgresContext();
 
-        protected Account? currentAccount = null;
+        protected static Account? currentAccount = null;
     }
 }

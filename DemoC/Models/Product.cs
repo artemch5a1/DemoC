@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using System;
 using System.Collections.Generic;
 
 namespace DemoC.Models;
@@ -38,4 +40,13 @@ public partial class Product
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual Supplier Supplier { get; set; } = null!;
+
+    public Bitmap BitmapImage { get 
+        {
+            var filename = string.IsNullOrWhiteSpace(Image) ? "picture.png" : Image;
+
+            Uri uri = new Uri($"avares://DemoC/Assets/{filename}");
+
+            return new Bitmap(AssetLoader.Open(uri));
+        } }
 }
