@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:DemoC.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="DemoC.Views.LoginView"
+			 x:DataType="vm:LoginViewModel">
+
+	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+		<TextBox Text="{Binding LoginValue}"
+				 Width="255"
+				 Watermark="Логин"
+				 Margin="0 0 0 20"/>
+
+		<TextBox Text="{Binding Password}"
+				 Width="255"
+				 Watermark="Пароль"
+				 PasswordChar="*"
+				 Margin="0 0 0 20"/>
+
+		<Button Content="Войти" 
+		        Width="150" 
+				Command="{Binding LoginCommand}" 
+				HorizontalContentAlignment="Center" 
+				HorizontalAlignment="Center"
+				Background="Green"/>
+
+	</StackPanel>
+
+</UserControl>

@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:DemoC.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="DemoC.Views.ProductView"
+			 x:DataType="vm:ProductViewModel">
+	<Grid RowDefinitions="2* 8*">
+
+		<Grid Grid.Row="1" Width="850">
+
+			<ScrollViewer>
+				<ItemsControl ItemsSource="{Binding Products}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+
+							<Border BorderBrush="Black" BorderThickness="1" Padding="5 5 5 5" Margin="20 0 20 5">
+
+								<Grid ColumnDefinitions="2.5* 6* 1.5*">
+
+									<Border  Grid.Column="1"
+											 BorderBrush="Black"
+											 BorderThickness="1"
+											 Padding="5 5 5 5">
+
+										<StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+
+											<TextBlock Text="{Binding CategoryAndTitle}" Margin="0 0 0 5" HorizontalAlignment="Left"/>
+
+											<TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+											<TextBlock Text="{Binding Manufacturer.Title, StringFormat='Производитель: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+											<TextBlock Text="{Binding Supplier.Title, StringFormat='Поставщик: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+											<TextBlock Text="{Binding Price, StringFormat='Цена: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+											<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+											<TextBlock Text="{Binding Countin, StringFormat='Количество на складе: {0}'}"
+													   Margin="0 0 0 5"
+													   HorizontalAlignment="Left"
+													   TextWrapping="Wrap"/>
+
+										</StackPanel>
+									</Border>
+
+									<Border Grid.Column="2"
+				                             BorderBrush="Black"
+											 BorderThickness="1"
+											 Padding="5 5 5 5"
+											 Margin="5 0 0 0">
+										
+										<TextBlock Text="{Binding Sale, StringFormat='Скидка: {0}%'}" 
+					                               HorizontalAlignment="Center" 
+												   VerticalAlignment="Center"/>
+
+									</Border>
+
+								</Grid>
+
+							</Border>
+
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+
+		</Grid>
+
+	</Grid>
+</UserControl>
