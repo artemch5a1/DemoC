@@ -44,6 +44,10 @@ namespace DemoC.ViewModels
 
             IsEdit = productId is not null; 
 
+            PriceString = ProductValue.Price.ToString();
+            CouninString = ProductValue.Countin.ToString();
+            SaleString = ProductValue.Sale.ToString();
+
             LoadAll();
         }
 

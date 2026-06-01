@@ -5,7 +5,8 @@
 			 xmlns:vm="using:DemoC.ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="DemoC.Views.ProductView"
-			 x:DataType="vm:ProductViewModel">
+			 x:DataType="vm:ProductViewModel"
+			 x:Name="Page">
 	<Grid RowDefinitions="2* 8*">
 
 		<StackPanel Grid.Row="0"
@@ -45,7 +46,7 @@
 			</ComboBox>
 
 			<Button Content="Создать"
-			        Command="{Binding CreateNavCommand}"
+					Command="{Binding CreateNavCommand}"
 					IsVisible="{Binding CanCrud}"
 					Width="255"
 					Margin="0 0 10 0"
@@ -104,18 +105,18 @@
 
 												<StackPanel Orientation="Horizontal" IsVisible="{Binding IsSaleNotNull}">
 													<TextBlock Text="{Binding Price, StringFormat='Цена: {0} '}"
-														   Margin="0 0 0 5"
-														   Foreground="Red"
-														   TextDecorations="StrikeThrough"
-														   HorizontalAlignment="Left"
-														   TextWrapping="Wrap"
-														   />
+															   Margin="0 0 0 5"
+															   Foreground="Red"
+															   TextDecorations="StrikeThrough"
+															   HorizontalAlignment="Left"
+															   TextWrapping="Wrap"
+															   />
 
 													<TextBlock Text="{Binding PriceWithSale}"
-														   Margin="0 0 0 5"
-														   HorizontalAlignment="Left"
-														   TextWrapping="Wrap"
-														   />
+															   Margin="0 0 0 5"
+															   HorizontalAlignment="Left"
+															   TextWrapping="Wrap"
+															   />
 												</StackPanel>
 
 												<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
@@ -127,6 +128,14 @@
 														   Margin="0 0 0 5"
 														   HorizontalAlignment="Left"
 														   TextWrapping="Wrap"/>
+
+												<Button Content="Изменить"
+														Command="{Binding #Page.DataContext.EditNavCommand}"
+														IsVisible="{Binding #Page.DataContext.CanCrud}"
+														CommandParameter="{Binding Productid}"
+														Width="255"
+														Margin="0 0 0 5"
+														Background="Green"/>
 
 											</StackPanel>
 										</Border>
@@ -190,18 +199,18 @@
 
 												<StackPanel Orientation="Horizontal" IsVisible="{Binding IsSaleNotNull}">
 													<TextBlock Text="{Binding Price, StringFormat='Цена: {0} '}"
-														   Margin="0 0 0 5"
-														   Foreground="Red"
-														   TextDecorations="StrikeThrough"
-														   HorizontalAlignment="Left"
-														   TextWrapping="Wrap"
-														   />
+															   Margin="0 0 0 5"
+															   Foreground="Red"
+															   TextDecorations="StrikeThrough"
+															   HorizontalAlignment="Left"
+															   TextWrapping="Wrap"
+															   />
 
 													<TextBlock Text="{Binding PriceWithSale}"
-														   Margin="0 0 0 5"
-														   HorizontalAlignment="Left"
-														   TextWrapping="Wrap"
-														   />
+															   Margin="0 0 0 5"
+															   HorizontalAlignment="Left"
+															   TextWrapping="Wrap"
+															   />
 												</StackPanel>
 
 												<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
@@ -213,6 +222,14 @@
 														   Margin="0 0 0 5"
 														   HorizontalAlignment="Left"
 														   TextWrapping="Wrap"/>
+
+												<Button Content="Изменить"
+														Command="{Binding #Page.DataContext.EditNavCommand}"
+														IsVisible="{Binding #Page.DataContext.CanCrud}"
+														CommandParameter="{Binding Productid}"
+														Width="255"
+														Margin="0 0 0 5"
+														Background="Green"/>
 
 											</StackPanel>
 										</Border>

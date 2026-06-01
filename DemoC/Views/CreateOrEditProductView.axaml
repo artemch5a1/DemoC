@@ -62,12 +62,13 @@
         <ComboBox ItemsSource="{Binding Categories}"
                   SelectedValueBinding="{Binding Categoryid}"
                   SelectedValue="{Binding ProductValue.Categoryid}"
-                  PlaceholderText="Выберите категорию"
                   Width="255"
+                  PlaceholderText="Выберите категорию"
                   Margin="0 0 0 20">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Title}"
+                               TextWrapping="Wrap"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -75,25 +76,28 @@
         <ComboBox ItemsSource="{Binding Manufacturers}"
                   SelectedValueBinding="{Binding Manufacturerid}"
                   SelectedValue="{Binding ProductValue.Manufacturerid}"
-                  PlaceholderText="Выберите производителя"
                   Width="255"
+                  PlaceholderText="Выберите производителя"
                   Margin="0 0 0 20">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Title}"
+
+                               TextWrapping="Wrap"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
 
         <ComboBox ItemsSource="{Binding Suppliers}"
                   SelectedValueBinding="{Binding Supplierid}"
+                  Width="255"
                   SelectedValue="{Binding ProductValue.Supplierid}"
                   PlaceholderText="Выберите поставщика"
-                  Width="255"
                   Margin="0 0 0 20">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Title}"
+                               TextWrapping="Wrap"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

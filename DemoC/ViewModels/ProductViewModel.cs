@@ -127,5 +127,11 @@ namespace DemoC.ViewModels
         {
             MainWindowViewModel.Instance.CurrentViewModel = new CreateOrEditProductViewModel();
         }
+
+        [RelayCommand]
+        private void EditNav(int idProduct)
+        {
+            MainWindowViewModel.Instance.CurrentViewModel = new CreateOrEditProductViewModel(idProduct);
+        }
     }
 }
