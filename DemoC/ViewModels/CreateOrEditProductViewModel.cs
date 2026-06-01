@@ -137,5 +137,8 @@ namespace DemoC.ViewModels
                 MainWindow.NotificationManager?.Show(new Notification("Ошибка", $"{ex.Message}", NotificationType.Error));
             }
         }
+
+        [RelayCommand]
+        private static void Back() => MainWindowViewModel.Instance.CurrentViewModel = new ProductViewModel();
     }
 }

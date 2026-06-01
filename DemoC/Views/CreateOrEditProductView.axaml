@@ -7,13 +7,27 @@
              x:Class="DemoC.Views.CreateOrEditProductView"
              x:DataType="vm:CreateOrEditProductViewModel">
 
-    <StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Button Content="Назад"
+                Width="150"
+                Command="{Binding BackCommand}"
+                HorizontalContentAlignment="Left"
+                Margin="0 0 0 20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"/>
 
         <TextBox Text="{Binding ProductValue.Title}"
                  Width="255"
                  Watermark="Название"
                  Margin="0 0 0 20"
                  TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding ProductValue.Articul}"
+                 Width="255"
+                 Watermark="Артикул"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap" />
 
         <TextBox Text="{Binding ProductValue.Description}"
                  Width="255"
