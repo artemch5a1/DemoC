@@ -19,6 +19,8 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<Govno> Govnos { get; set; }
+
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -63,6 +65,16 @@ public partial class PostgresContext : DbContext
             entity.ToTable("categories", "demo");
 
             entity.Property(e => e.Categoryid).HasColumnName("categoryid");
+            entity.Property(e => e.Title).HasColumnName("title");
+        });
+
+        modelBuilder.Entity<Govno>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("govno_pkey");
+
+            entity.ToTable("govno", "demo");
+
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title).HasColumnName("title");
         });
 

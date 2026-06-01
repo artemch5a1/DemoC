@@ -1,6 +1,4 @@
-﻿using Avalonia.Media.Imaging;
-using Avalonia.Platform;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace DemoC.Models;
@@ -13,17 +11,9 @@ public partial class Product
 
     public string Title { get; set; } = null!;
 
-    public string CategoryAndTitle => $"{Category.Title} | {Title}";
-
     public string UnitOfMeasurement { get; set; } = null!;
 
     public decimal Price { get; set; }
-
-    public decimal PriceWithSale => Price - (Price * (decimal)((decimal)Sale / (decimal)100));
-
-    public bool IsSaleNotNull => Sale > 0;
-
-    public bool SaleMoreThen => Sale > 15;
 
     public int Supplierid { get; set; }
 
@@ -46,13 +36,4 @@ public partial class Product
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual Supplier Supplier { get; set; } = null!;
-
-    public Bitmap BitmapImage { get 
-        {
-            var filename = string.IsNullOrWhiteSpace(Image) ? "picture.png" : Image;
-
-            Uri uri = new Uri($"avares://DemoC/Assets/{filename}");
-
-            return new Bitmap(AssetLoader.Open(uri));
-        } }
 }
