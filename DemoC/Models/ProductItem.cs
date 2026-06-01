@@ -1,6 +1,8 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
+using System.IO;
 
 namespace DemoC.Models
 {
@@ -19,11 +21,29 @@ namespace DemoC.Models
         {
             get
             {
-                var filename = string.IsNullOrWhiteSpace(Image) ? "picture.png" : Image;
+                if (string.IsNullOrWhiteSpace(Image))
+                    return AssetsLoad("picture.png");
 
-                Uri uri = new Uri($"avares://DemoC/Assets/{filename}");
+                string path = Path.Combine(AppContext.BaseDirectory, "Images", Image);
 
+                if (!File.Exists(path))
+                    return AssetsLoad(Image);
+
+                return new Bitmap(path);
+            }
+        }
+
+        private static Bitmap AssetsLoad(string filename)
+        {
+            Uri uri = new Uri($"avares://DemoC/Assets/{filename}");
+
+            try
+            {
                 return new Bitmap(AssetLoader.Open(uri));
+            }
+            catch
+            {
+                return new Bitmap(AssetLoader.Open(new Uri($"avares://DemoC/Assets/picture.png")));
             }
         }
     }
