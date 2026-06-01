@@ -19,6 +19,12 @@ public partial class Product
 
     public decimal Price { get; set; }
 
+    public decimal PriceWithSale => Price - (Price * (decimal)((decimal)Sale / (decimal)100));
+
+    public bool IsSaleNotNull => Sale > 0;
+
+    public bool SaleMoreThen => Sale > 15;
+
     public int Supplierid { get; set; }
 
     public int Manufacturerid { get; set; }

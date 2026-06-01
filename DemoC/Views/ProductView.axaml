@@ -8,23 +8,23 @@
 			 x:DataType="vm:ProductViewModel">
 	<Grid RowDefinitions="2* 8*">
 
-		<StackPanel Grid.Row="0" 
-			  HorizontalAlignment="Center" 
-			  VerticalAlignment="Center"
-			  Orientation="Horizontal"
-			  IsVisible="{Binding CanFilter}">
-			
-			<TextBox Text="{Binding SearchText}"
-			Watermark="Поиск"
-			Width="255" 
-			TextWrapping="Wrap"
-			Margin="0 0 10 0"/>
+		<StackPanel Grid.Row="0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Orientation="Horizontal"
+					IsVisible="{Binding CanFilter}">
 
-			<ComboBox ItemsSource="{Binding Suppliers}" 
-			 PlaceholderText="Выберите поставщика" 
-			 SelectedItem="{Binding SelectedSupplier}"
-			 Width="255" 
-			 Margin="0 0 10 0">
+			<TextBox Text="{Binding SearchText}"
+					 Watermark="Поиск"
+					 Width="255"
+					 TextWrapping="Wrap"
+					 Margin="0 0 10 0"/>
+
+			<ComboBox ItemsSource="{Binding Suppliers}"
+					  PlaceholderText="Выберите поставщика"
+					  SelectedItem="{Binding SelectedSupplier}"
+					  Width="255"
+					  Margin="0 0 10 0">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>
 						<TextBlock Text="{Binding Title}"/>
@@ -32,11 +32,11 @@
 				</ComboBox.ItemTemplate>
 			</ComboBox>
 
-			<ComboBox ItemsSource="{Binding SortedParametrs}" 
-			 PlaceholderText="Сортировка" 
-			 SelectedItem="{Binding SelectedSortedParametrs}"
-			 Width="255" 
-			 Margin="0 0 10 0">
+			<ComboBox ItemsSource="{Binding SortedParametrs}"
+					  PlaceholderText="Сортировка"
+					  SelectedItem="{Binding SelectedSortedParametrs}"
+					  Width="255"
+					  Margin="0 0 10 0">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>
 						<TextBlock Text="{Binding }" TextWrapping="Wrap"/>
@@ -53,69 +53,180 @@
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 
-							<Border BorderBrush="Black" BorderThickness="1" Padding="5 5 5 5" Margin="20 0 20 5">
+							<Grid>
 
-								<Grid ColumnDefinitions="2.5* 6* 1.5*">
+								<Border BorderBrush="Black"
+										BorderThickness="1"
+										Padding="5 5 5 5"
+										Margin="20 0 20 5"
+										IsVisible="{Binding !SaleMoreThen}">
 
-									<Image Source="{Binding BitmapImage}" Width="100" Height="100"/>
+									<Grid ColumnDefinitions="2.5* 6* 1.5*">
 
-									<Border  Grid.Column="1"
-											 BorderBrush="Black"
-											 BorderThickness="1"
-											 Padding="5 5 5 5">
+										<Image Source="{Binding BitmapImage}" Width="100" Height="100"/>
 
-										<StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+										<Border  Grid.Column="1"
+												 BorderBrush="Black"
+												 BorderThickness="1"
+												 Padding="5 5 5 5">
 
-											<TextBlock Text="{Binding CategoryAndTitle}" Margin="0 0 0 5" HorizontalAlignment="Left"/>
+											<StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
 
-											<TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<TextBlock Text="{Binding CategoryAndTitle}" Margin="0 0 0 5" HorizontalAlignment="Left"/>
 
-											<TextBlock Text="{Binding Manufacturer.Title, StringFormat='Производитель: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
 
-											<TextBlock Text="{Binding Supplier.Title, StringFormat='Поставщик: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<TextBlock Text="{Binding Manufacturer.Title, StringFormat='Производитель: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
 
-											<TextBlock Text="{Binding Price, StringFormat='Цена: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<TextBlock Text="{Binding Supplier.Title, StringFormat='Поставщик: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
 
-											<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<TextBlock Text="{Binding Price, StringFormat='Цена: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   IsVisible="{Binding !IsSaleNotNull}"/>
 
-											<TextBlock Text="{Binding Countin, StringFormat='Количество на складе: {0}'}"
-													   Margin="0 0 0 5"
-													   HorizontalAlignment="Left"
-													   TextWrapping="Wrap"/>
+												<StackPanel Orientation="Horizontal" IsVisible="{Binding IsSaleNotNull}">
+													<TextBlock Text="{Binding Price, StringFormat='Цена: {0} '}"
+														   Margin="0 0 0 5"
+														   Foreground="Red"
+														   TextDecorations="StrikeThrough"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   />
 
-										</StackPanel>
-									</Border>
+													<TextBlock Text="{Binding PriceWithSale}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   />
+												</StackPanel>
 
-									<Border Grid.Column="2"
-				                             BorderBrush="Black"
-											 BorderThickness="1"
-											 Padding="5 5 5 5"
-											 Margin="5 0 0 0">
-										
-										<TextBlock Text="{Binding Sale, StringFormat='Скидка: {0}%'}" 
-					                               HorizontalAlignment="Center" 
-												   VerticalAlignment="Center"/>
+												<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
 
-									</Border>
+												<TextBlock Text="{Binding Countin, StringFormat='Количество на складе: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
 
-								</Grid>
+											</StackPanel>
+										</Border>
 
-							</Border>
+										<Border Grid.Column="2"
+												BorderBrush="Black"
+												BorderThickness="1"
+												Padding="5 5 5 5"
+												Margin="5 0 0 0">
+
+											<TextBlock Text="{Binding Sale, StringFormat='Скидка: {0}%'}"
+													   HorizontalAlignment="Center"
+													   VerticalAlignment="Center"/>
+
+										</Border>
+
+									</Grid>
+
+								</Border>
+
+								<Border Background="#2E8B57"
+										BorderBrush="Black"
+										BorderThickness="1"
+										Padding="5 5 5 5"
+										Margin="20 0 20 5"
+										IsVisible="{Binding SaleMoreThen}">
+
+									<Grid ColumnDefinitions="2.5* 6* 1.5*">
+
+										<Image Source="{Binding BitmapImage}" Width="100" Height="100"/>
+
+										<Border  Grid.Column="1"
+												 BorderBrush="Black"
+												 BorderThickness="1"
+												 Padding="5 5 5 5">
+
+											<StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+
+												<TextBlock Text="{Binding CategoryAndTitle}" Margin="0 0 0 5" HorizontalAlignment="Left"/>
+
+												<TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
+
+												<TextBlock Text="{Binding Manufacturer.Title, StringFormat='Производитель: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
+
+												<TextBlock Text="{Binding Supplier.Title, StringFormat='Поставщик: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
+
+												<TextBlock Text="{Binding Price, StringFormat='Цена: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   IsVisible="{Binding !IsSaleNotNull}"/>
+
+												<StackPanel Orientation="Horizontal" IsVisible="{Binding IsSaleNotNull}">
+													<TextBlock Text="{Binding Price, StringFormat='Цена: {0} '}"
+														   Margin="0 0 0 5"
+														   Foreground="Red"
+														   TextDecorations="StrikeThrough"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   />
+
+													<TextBlock Text="{Binding PriceWithSale}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"
+														   />
+												</StackPanel>
+
+												<TextBlock Text="{Binding UnitOfMeasurement, StringFormat='Ед. измерения: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
+
+												<TextBlock Text="{Binding Countin, StringFormat='Количество на складе: {0}'}"
+														   Margin="0 0 0 5"
+														   HorizontalAlignment="Left"
+														   TextWrapping="Wrap"/>
+
+											</StackPanel>
+										</Border>
+
+										<Border Grid.Column="2"
+												BorderBrush="Black"
+												BorderThickness="1"
+												Padding="5 5 5 5"
+												Margin="5 0 0 0">
+
+											<TextBlock Text="{Binding Sale, StringFormat='Скидка: {0}%'}"
+													   HorizontalAlignment="Center"
+													   VerticalAlignment="Center"/>
+
+										</Border>
+
+									</Grid>
+
+								</Border>
+
+							</Grid>
 
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
