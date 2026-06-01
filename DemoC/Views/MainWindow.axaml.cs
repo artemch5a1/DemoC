@@ -7,6 +7,7 @@ namespace DemoC.Views
     {
         public static INotificationManager? NotificationManager;
 
+        public static MainWindow Instance = null!;
 
         public MainWindow()
         {
@@ -17,6 +18,8 @@ namespace DemoC.Views
                 Position = NotificationPosition.TopRight,
                 MaxItems = 3,
             };
+
+            Instance = this;
         }
     }
 }

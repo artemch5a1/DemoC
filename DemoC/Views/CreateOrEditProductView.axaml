@@ -102,6 +102,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
+        <Image Source="{Binding Image}" Width="100" Height="100" Margin="0 0 0 20"/>
+
+        <Button Content="Выбрать фото"
+                Width="150"
+                Command="{Binding PickImageCommand}"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Center"/>
+
         <Button Content="Сохранить"
                 Width="150"
                 Command="{Binding SaveCommand}"

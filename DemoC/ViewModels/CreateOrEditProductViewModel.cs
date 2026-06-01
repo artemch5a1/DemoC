@@ -1,13 +1,19 @@
-﻿using Avalonia.Controls.Notifications;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DemoC.Models;
 using DemoC.Views;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DemoC.ViewModels
 {
@@ -54,6 +60,8 @@ namespace DemoC.ViewModels
             CouninString = ProductValue.Countin.ToString();
             SaleString = ProductValue.Sale.ToString();
 
+            Image = ProductValue.BitmapImage;
+
             LoadAll();
         }
 
@@ -75,6 +83,69 @@ namespace DemoC.ViewModels
             Suppliers = new ObservableCollection<Supplier>(suppliers);
 
             Categories = new ObservableCollection<Category>(categories);
+        }
+
+        private void SaveImage(int id) 
+        {
+            if(string.IsNullOrWhiteSpace(_newPath))
+                return;
+
+
+            string newDirectory = Path.Combine(AppContext.BaseDirectory, "Images");
+
+            string newImageName = $"{Guid.NewGuid()}" + Path.GetExtension(_newPath);
+
+            string newFilePath = Path.Combine(newDirectory, newImageName);
+
+
+            try 
+            {
+                
+                File.Copy(_newPath, newFilePath, true);
+
+                _context.Products.Where(x => x.Productid == id).ExecuteUpdate(x => x.SetProperty(i => i.Image, i => newImageName));
+
+                _context.SaveChanges();
+
+            }
+            catch (Exception ex) 
+            {
+                MainWindow.NotificationManager?.Show(new Notification("Ошибка", $"{ex.Message}", NotificationType.Error));
+            }
+        }
+
+        [RelayCommand]
+        private async Task PickImage() 
+        {
+            IReadOnlyList<IStorageFile> files = await MainWindow.Instance.StorageProvider.OpenFilePickerAsync(
+                new FilePickerOpenOptions
+                {
+                    AllowMultiple = false,
+                    FileTypeFilter =
+                    [
+                        new FilePickerFileType("Image")
+                        {
+                            Patterns = ["*.jpg", "*.png", "*.jpeg"],
+                        },
+                    ]
+                }
+            );
+
+            IStorageFile? storageFile = files.FirstOrDefault();
+
+            if (storageFile is null)
+                return;
+
+            _newPath = storageFile.Path.LocalPath;
+
+            try
+            {
+                Image = new Bitmap(_newPath);
+            }
+            catch (Exception ex)
+            {
+                MainWindow.NotificationManager?.Show(new Notification("Ошибка", $"{ex.Message}", NotificationType.Error));
+            }
         }
 
         [RelayCommand]
@@ -120,6 +191,8 @@ namespace DemoC.ViewModels
 
                 _context.SaveChanges();
 
+                SaveImage(ProductValue.Productid);
+
                 MainWindow.NotificationManager?.Show(new Notification("Успех", $"Данные обновлены", NotificationType.Success));
 
                 MainWindowViewModel.Instance.CurrentViewModel = new ProductViewModel();
@@ -134,9 +207,11 @@ namespace DemoC.ViewModels
         {
             try 
             {
-                _context.Products.Add(ProductValue);
+                EntityEntry<Product> entityEntry = _context.Products.Add(ProductValue);
 
                 _context.SaveChanges();
+
+                SaveImage(entityEntry.Entity.Productid);
 
                 MainWindow.NotificationManager?.Show(new Notification("Успех", $"Данные обновлены", NotificationType.Success));
 
