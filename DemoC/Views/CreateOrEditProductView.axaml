@@ -1,0 +1,96 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DemoC.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoC.Views.CreateOrEditProductView"
+             x:DataType="vm:CreateOrEditProductViewModel">
+
+    <StackPanel>
+
+        <TextBox Text="{Binding ProductValue.Title}"
+                 Width="255"
+                 Watermark="Название"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding ProductValue.Description}"
+                 Width="255"
+                 Watermark="Описание"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding ProductValue.UnitOfMeasurement}"
+                 Width="255"
+                 Watermark="Единица измерения"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding PriceString}"
+                 Width="255"
+                 Watermark="Цена"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding SaleString}"
+                 Width="255"
+                 Watermark="Скидка"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <TextBox Text="{Binding CouninString}"
+                 Width="255"
+                 Watermark="Количество на складе"
+                 Margin="0 0 0 20"
+                 TextWrapping="Wrap"/>
+
+        <ComboBox ItemsSource="{Binding Categories}"
+                  SelectedValueBinding="{Binding Categoryid}"
+                  SelectedValue="{Binding ProductValue.Categoryid}"
+                  PlaceholderText="Выберите категорию"
+                  Width="255"
+                  Margin="0 0 0 20">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox ItemsSource="{Binding Manufacturers}"
+                  SelectedValueBinding="{Binding Manufacturerid}"
+                  SelectedValue="{Binding ProductValue.Manufacturerid}"
+                  PlaceholderText="Выберите производителя"
+                  Width="255"
+                  Margin="0 0 0 20">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox ItemsSource="{Binding Suppliers}"
+                  SelectedValueBinding="{Binding Supplierid}"
+                  SelectedValue="{Binding ProductValue.Supplierid}"
+                  PlaceholderText="Выберите поставщика"
+                  Width="255"
+                  Margin="0 0 0 20">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" Width="255" TextWrapping="Wrap"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Content="Сохранить"
+                Width="150"
+                Command="{Binding SaveCommand}"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="Green"/>
+
+    </StackPanel>
+
+</UserControl>

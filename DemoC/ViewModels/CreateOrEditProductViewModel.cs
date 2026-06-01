@@ -27,6 +27,15 @@ namespace DemoC.ViewModels
         [ObservableProperty]
         private bool isEdit = false;
 
+        [ObservableProperty]
+        private string priceString = string.Empty;
+
+        [ObservableProperty]
+        private string saleString = string.Empty;
+
+        [ObservableProperty]
+        private string couninString = string.Empty;
+
         public CreateOrEditProductViewModel(int? productId = null)
         {
             ProductValue = productId is null ? 
@@ -61,6 +70,32 @@ namespace DemoC.ViewModels
         [RelayCommand]
         private void Save() 
         {
+            if (string.IsNullOrWhiteSpace(ProductValue.Title) ||
+                string.IsNullOrWhiteSpace(ProductValue.Description) ||
+                string.IsNullOrWhiteSpace(ProductValue.UnitOfMeasurement) ||
+                string.IsNullOrWhiteSpace(ProductValue.Articul) ||
+                ProductValue.Categoryid == -1 ||
+                ProductValue.Manufacturerid == -1 ||
+                ProductValue .Supplierid == -1)
+            {
+                MainWindow.NotificationManager?.Show(new Notification("Ошибка", "Есть незаполненые поля", NotificationType.Error));
+                return;
+            }
+
+            if (decimal.TryParse(PriceString, out decimal price) &&
+                int.TryParse(CouninString, out int countin) &&
+                int.TryParse(SaleString, out int sale))
+            {
+                ProductValue.Price = price;
+                ProductValue.Countin = countin;
+                ProductValue.Sale = sale;
+            }
+            else 
+            {
+                MainWindow.NotificationManager?.Show(new Notification("Ошибка", "Неверный формат числа", NotificationType.Error));
+                return;
+            }
+
             if (IsEdit)
                 Edit();
             else
