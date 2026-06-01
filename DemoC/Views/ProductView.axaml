@@ -44,6 +44,13 @@
 				</ComboBox.ItemTemplate>
 			</ComboBox>
 
+			<Button Content="Создать"
+			        Command="{Binding CreateNavCommand}"
+					IsVisible="{Binding CanCrud}"
+					Width="255"
+					Margin="0 0 10 0"
+					Background="Green"/>
+
 		</StackPanel>
 
 		<Grid Grid.Row="1" Width="850">

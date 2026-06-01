@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DemoC.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,10 +33,14 @@ namespace DemoC.ViewModels
         [ObservableProperty]
         public bool canFilter;
 
+        [ObservableProperty]
+        public bool canCrud;
+
         public ProductViewModel()
         {
             _ = LoadProduct();
             CanFilter = currentAccount?.Role == Enums.Role.Manager || currentAccount?.Role == Enums.Role.Admin;
+            CanCrud = currentAccount?.Role == Enums.Role.Admin;
         }
 
         private async Task LoadProduct()
@@ -115,6 +120,12 @@ namespace DemoC.ViewModels
         partial void OnSelectedSortedParametrsChanged(string? value)
         {
             _ = Filter();
+        }
+
+        [RelayCommand]
+        private void CreateNav() 
+        {
+            MainWindowViewModel.Instance.CurrentViewModel = new CreateOrEditProductViewModel();
         }
     }
 }
