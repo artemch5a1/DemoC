@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Notifications;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DemoC.Models;
@@ -12,6 +13,11 @@ namespace DemoC.ViewModels
 {
     public partial class CreateOrEditProductViewModel : ViewModelBase
     {
+        [ObservableProperty]
+        private Bitmap? _image;
+
+        private string? _newPath;
+
         [ObservableProperty]
         private Product productValue;
 
